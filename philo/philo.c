@@ -6,20 +6,60 @@
 /*   By: alaaouar <alaaouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:30:35 by alaaouar          #+#    #+#             */
-/*   Updated: 2024/10/11 15:33:22 by alaaouar         ###   ########.fr       */
+/*   Updated: 2024/10/12 22:16:21 by alaaouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+
+void    get_args(t_philo *sceen, char **av)
+{
+    sceen->philos = ft_atoi(av[1]);
+    sceen->rip_time = ft_atoi(av[2]);
+    sceen->eat_time = ft_atoi(av[3]);
+    sceen->zzz_time = ft_atoi(av[4]);
+}
+void	mutex_lunch(t_philo *sceen)
+{
+	int	i;
+
+	i = 0;
+	pthread_mutex_init(&sceen->free_shopsticks, NULL);
+	while (i < sceen->philos)
+    {
+		pthread_mutex_init(&sceen->shopsticks[i], NULL);
+        i++;    
+    }
+}
+void    everything_init(t_philo *sceen, int ac, char **av)
+{
+    if (ac != 5)
+        error("Invalid argument\n");
+    get_args(sceen, av);
+    sceen->philosophers = ft_calloc(sceen->philos, sizeof(t_philosopher));
+    sceen->shopsticks = ft_calloc(sceen->philos, sizeof(pthread_mutex_t));
+    if (!sceen->philosophers || !sceen->shopsticks)
+        error("Failed to allocate memory for philosophers");
+    sceen->start_time = get_time();
+    sceen->end = 0;
+    sceen->all_ate = 0;
+    mutex_lunch(sceen);
+    
+}
+
+
+
 int main(int ac, char **av)
 {
     t_philo sceen;
-    
+    t_philosopher *philosophers;
+    int i = 0;
+
+
+    everything_init(&sceen, ac, av);
+    print_sceen(&sceen);
     if (starting_check(av, ac) != 0)
         error("ERROR at THE STARTING CHECK !!");
-    data_init(&sceen, av);
-    print_sceen(&sceen);
-    
     return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: alaaouar <alaaouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:33:30 by alaaouar          #+#    #+#             */
-/*   Updated: 2024/10/11 15:33:47 by alaaouar         ###   ########.fr       */
+/*   Updated: 2024/10/12 20:51:01 by alaaouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,4 @@ int starting_check(char **av, int ac)
     return 0;
 }
 
-void data_init(t_philo *sceen, char **av)
-{
-    sceen->philos = atoi(av[1]);
-    sceen->rip_time = atoi(av[2]);
-    sceen->eat_time = atoi(av[3]);
-    sceen->zzz_time = atoi(av[4]);
-}
+
