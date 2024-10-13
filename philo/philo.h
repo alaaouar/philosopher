@@ -6,7 +6,7 @@
 /*   By: alaaouar <alaaouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:30:44 by alaaouar          #+#    #+#             */
-/*   Updated: 2024/10/12 22:17:08 by alaaouar         ###   ########.fr       */
+/*   Updated: 2024/10/13 18:30:35 by alaaouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <sys/time.h>
 
 typedef struct s_philosopher t_philosopher;
+typedef struct timeval t_time;
 
 typedef struct s_philo
 {
@@ -48,16 +49,17 @@ typedef struct s_philosopher
 
         /*      theards.c     */
 void    *philosopher_routine(void *arg);
-void	grab_fork(t_philo *philo, int f);
+void	grab_fork(t_philosopher *philo, int f);
 void	mutex_lunch(t_philo *sceen);
+t_philosopher   *allocate_for_philo(t_philo *sceen);
 
-t_philosopher   *allocate_for_philo(t_philo sceen);
         /*      parcing       */
         
 void    error(const char *message);
 int     starting_check(char **av, int ac);
 int     ft_atoi(char *str);
-void    data_init(t_philo *sceen, char **av);
 void    print_sceen(t_philo *sceen);
 void	*ft_calloc(size_t count, size_t size);
+void	ft_print_msg(char *message,t_philo *sceen);
+
 #endif
