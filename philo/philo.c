@@ -6,7 +6,7 @@
 /*   By: alaaouar <alaaouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:30:35 by alaaouar          #+#    #+#             */
-/*   Updated: 2024/10/14 10:18:09 by alaaouar         ###   ########.fr       */
+/*   Updated: 2024/10/14 12:40:19 by alaaouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int main(int ac, char **av)
         error("ERROR at THE STARTING CHECK !!");
     sceen.philosophers = allocate_for_philo(&sceen);
     mutex_lunch(&sceen);
-    
+    spawn_philos(&sceen);
     display_philo_info(&sceen);
     return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: alaaouar <alaaouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:30:44 by alaaouar          #+#    #+#             */
-/*   Updated: 2024/10/14 09:37:46 by alaaouar         ###   ########.fr       */
+/*   Updated: 2024/10/14 12:38:06 by alaaouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ void	        mutex_lunch(t_philo *sceen);
 t_philosopher   *allocate_for_philo(t_philo *sceen);
 long long       current_time(t_philo *philo);
 long long	    starting_time(void);
-
-
-
+void            *reaper(void *arg);
+void            *philos_hunger(void *arg);
+void            spawn_philos(t_philo *sceen);
 
         /*      parcing       */
         

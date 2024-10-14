@@ -6,7 +6,7 @@
 /*   By: alaaouar <alaaouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 10:42:13 by alaaouar          #+#    #+#             */
-/*   Updated: 2024/10/14 11:00:54 by alaaouar         ###   ########.fr       */
+/*   Updated: 2024/10/14 12:34:55 by alaaouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void    *reaper(void *arg)
     {
         if ((stone->last_meal + stone->sceen->rip_time) < starting_time())
         {
-            ft_print_msg("DIED", stone);
+            ft_print_msg("DIED", stone->sceen);
             stone->should_die = 1;
             stone->sceen->end = 1;
         }
