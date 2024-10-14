@@ -6,7 +6,7 @@
 /*   By: alaaouar <alaaouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:30:35 by alaaouar          #+#    #+#             */
-/*   Updated: 2024/10/13 18:45:39 by alaaouar         ###   ########.fr       */
+/*   Updated: 2024/10/14 10:18:09 by alaaouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ void	mutex_lunch(t_philo *sceen)
     }
 }
 void    everything_init(t_philo *sceen, int ac, char **av)
-{
-    struct timeval curent;
-    
+{    
     if (ac != 5)
         error("Invalid argument\n");
     get_args(sceen, av);
@@ -42,9 +40,7 @@ void    everything_init(t_philo *sceen, int ac, char **av)
     sceen->shopsticks = ft_calloc(sceen->philos, sizeof(pthread_mutex_t));
     if (!sceen->philosophers || !sceen->shopsticks)
         error("Failed to allocate memory for philosophers");
-    sceen->start_time = gettimeofday(&curent, NULL);
-    if (sceen->start_time == -1)
-        error("get time failed");
+    sceen->start_time = starting_time();
     sceen->end = 0;
     sceen->all_ate = 0;
     mutex_lunch(sceen);
@@ -95,6 +91,7 @@ int main(int ac, char **av)
     if (starting_check(av, ac) != 0)
         error("ERROR at THE STARTING CHECK !!");
     sceen.philosophers = allocate_for_philo(&sceen);
+    mutex_lunch(&sceen);
     
     display_philo_info(&sceen);
     return 0;
