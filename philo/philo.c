@@ -6,7 +6,7 @@
 /*   By: alaaouar <alaaouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:30:35 by alaaouar          #+#    #+#             */
-/*   Updated: 2024/10/15 17:36:00 by alaaouar         ###   ########.fr       */
+/*   Updated: 2024/10/15 20:33:45 by alaaouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,6 @@ void    everything_init(t_philo *sceen, int ac, char **av)
     sceen->all_ate = 0;
     mutex_lunch(sceen);
     
-}
-
-void    death_clock(t_philo *sceen)
-{
-    pthread_t   *observer;
-
-    while (sceen->end == 0)
-    {
-        observer = ft_calloc(1, sizeof(pthread_t));
-        if (observer == NULL)
-            error("Failed to allocate memory for reaper");
-        pthread_create(observer, NULL, reaper, sceen);
-        pthread_detach(*observer);
-        usleep(100);
-    }
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: alaaouar <alaaouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:54:37 by alaaouar          #+#    #+#             */
-/*   Updated: 2024/10/15 17:38:49 by alaaouar         ###   ########.fr       */
+/*   Updated: 2024/10/15 20:39:39 by alaaouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,25 @@ t_philosopher   *allocate_for_philo(t_philo *sceen)
     return (philosophers);
 }
 
+void    death_clock(t_philo *sceen)
+{
+    pthread_t   *observer;
+
+    while (sceen->end == 0)
+    {
+        observer = ft_calloc(1, sizeof(pthread_t));
+        if (observer == NULL)
+            error("Failed to allocate memory for reaper");
+        pthread_create(observer, NULL, reaper, sceen);
+        pthread_detach(*observer);
+        usleep(100);
+    }
+}
+
 void spawn_philos(t_philo *sceen)
 {
     t_philosopher *philosophers;
+    pthread_t observer;
     int i = 0;
 
     philosophers = allocate_for_philo(sceen);
@@ -93,12 +109,18 @@ void spawn_philos(t_philo *sceen)
         i++;
     }
     i = 0;
+    while (i <sceen->philos)
+    {
+        pthread_create(&observer, NULL, reaper, &philosophers[i]);
+        pthread_detach(observer);
+        i++;
+    }
+    
+    i = 0;
     while (i < sceen->philos)
     {
         pthread_join(philosophers[i].thread, NULL);
         i++;
     }
-
-    death_clock(sceen);
     free(philosophers);
 }
