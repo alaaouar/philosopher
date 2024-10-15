@@ -6,7 +6,7 @@
 /*   By: alaaouar <alaaouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 10:42:13 by alaaouar          #+#    #+#             */
-/*   Updated: 2024/10/14 19:39:29 by alaaouar         ###   ########.fr       */
+/*   Updated: 2024/10/15 17:30:26 by alaaouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void    *reaper(void *arg)
     t_philosopher *stone;
 
     stone = (t_philosopher *)arg;
-    while (stone->sceen->end == 1)
+    while (stone->sceen->end != 1)
     {
         if ((stone->last_meal + stone->sceen->rip_time) < starting_time())
         {

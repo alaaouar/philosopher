@@ -6,7 +6,7 @@
 /*   By: alaaouar <alaaouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:54:37 by alaaouar          #+#    #+#             */
-/*   Updated: 2024/10/14 20:03:14 by alaaouar         ###   ########.fr       */
+/*   Updated: 2024/10/15 17:38:49 by alaaouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void spawn_philos(t_philo *sceen)
         }
         i++;
     }
-
     i = 0;
     while (i < sceen->philos)
     {
@@ -100,5 +99,6 @@ void spawn_philos(t_philo *sceen)
         i++;
     }
 
+    death_clock(sceen);
     free(philosophers);
 }

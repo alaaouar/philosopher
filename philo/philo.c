@@ -6,7 +6,7 @@
 /*   By: alaaouar <alaaouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:30:35 by alaaouar          #+#    #+#             */
-/*   Updated: 2024/10/14 19:47:25 by alaaouar         ###   ########.fr       */
+/*   Updated: 2024/10/15 17:36:00 by alaaouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,41 +46,22 @@ void    everything_init(t_philo *sceen, int ac, char **av)
     mutex_lunch(sceen);
     
 }
-void display_philo_info(t_philo *philo) {
-    if (!philo) {
-        printf("Philosopher info is NULL\n");
-        return;
-    }
-    printf("Philo Structure Information:\n");
-    printf("Number of Philosophers: %d\n", philo->philos);
-    printf("Time to RIP (ms): %d\n", philo->rip_time);
-    printf("Time to Eat (ms): %d\n", philo->eat_time);
-    printf("Time to Sleep (ms): %d\n", philo->zzz_time);     
-    printf("Times Each Philosopher Must Eat: %d\n", philo->times_must_eat);
-    printf("End Flag: %d\n", philo->end);
-    printf("All Ate Flag: %d\n", philo->all_ate);
-    printf("Start Time: %lld\n", philo->start_time);
-    
-    // Print shopsticks state (assuming you want to show the mutex addresses)
-    printf("Shopsticks Mutex Addresses:\n");
-    for (int i = 0; i < philo->philos; i++) {
-        printf("Shopstick %d: %p\n", i, (void*)&philo->shopsticks[i]);
-    }
-    
-    // Print the free shopstick mutex
-    printf("Free Shopstick Mutex Address: %p\n", (void*)&philo->free_shopsticks);
 
-    // Print philosophers' info
-    printf("=====Philosophers Information:=====\n");
-    for (int i = 0; i < philo->philos; i++) {
-        t_philosopher *philosopher = &philo->philosophers[i];
-        printf("  Philosopher ID: %d\n", philosopher->id);
-        printf("  Times      Ate: %d\n", philosopher->ate);
-        printf("  Should DieFlag: %d\n", philosopher->should_die);
-        printf("  Last Meal Time: %lld\n", philosopher->last_meal);
-        printf("  Thread ID     : %lu\n", philosopher->thread);
+void    death_clock(t_philo *sceen)
+{
+    pthread_t   *observer;
+
+    while (sceen->end == 0)
+    {
+        observer = ft_calloc(1, sizeof(pthread_t));
+        if (observer == NULL)
+            error("Failed to allocate memory for reaper");
+        pthread_create(observer, NULL, reaper, sceen);
+        pthread_detach(*observer);
+        usleep(100);
     }
 }
+
 
 int main(int ac, char **av)
 {
@@ -92,6 +73,5 @@ int main(int ac, char **av)
         error("ERROR at THE STARTING CHECK !!");
     mutex_lunch(&sceen);
     spawn_philos(&sceen);
-    display_philo_info(&sceen);
     return 0;
 }
