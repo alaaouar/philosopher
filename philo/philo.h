@@ -6,7 +6,7 @@
 /*   By: alaaouar <alaaouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:30:44 by alaaouar          #+#    #+#             */
-/*   Updated: 2024/10/14 12:38:06 by alaaouar         ###   ########.fr       */
+/*   Updated: 2024/10/14 20:03:20 by alaaouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int     starting_check(char **av, int ac);
 int     ft_atoi(char *str);
 void    print_sceen(t_philo *sceen);
 void	*ft_calloc(size_t count, size_t size);
-void	ft_print_msg(char *message,t_philo *sceen);
+void	ft_print_msg(char *message,t_philosopher *sceen);
+void    philo_eating(t_philosopher *philo);
+void    sleep_and_think(t_philosopher *philo);
 
 #endif

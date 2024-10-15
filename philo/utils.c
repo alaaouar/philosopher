@@ -6,7 +6,7 @@
 /*   By: alaaouar <alaaouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 17:43:34 by alaaouar          #+#    #+#             */
-/*   Updated: 2024/10/14 09:35:27 by alaaouar         ###   ########.fr       */
+/*   Updated: 2024/10/14 20:01:13 by alaaouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,9 @@ int ft_strlen(char *str)
         i++;
     return (i);
 }
-void	ft_print_msg(char *message,t_philo *sceen)
+void	ft_print_msg(char *message,t_philosopher *sceen)
 {
-	int i;
-
-	i = 0;
-	pthread_mutex_lock(&sceen->free_shopsticks);
-	while (message[i] != '\0')
-	{
-		write(1, &message[i], 1);
-		i++;
-	}
-	pthread_mutex_unlock(&sceen->free_shopsticks);
+	pthread_mutex_lock(&sceen->sceen->free_shopsticks);
+	printf("%d %s\n", sceen->id + 1, message);
+	pthread_mutex_unlock(&sceen->sceen->free_shopsticks);
 }

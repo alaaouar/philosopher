@@ -6,7 +6,7 @@
 /*   By: alaaouar <alaaouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:54:37 by alaaouar          #+#    #+#             */
-/*   Updated: 2024/10/14 12:41:50 by alaaouar         ###   ########.fr       */
+/*   Updated: 2024/10/14 20:03:14 by alaaouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,26 @@ void    *philosopher_routine(void *arg)
             break;
         }
         grab_fork(philos, left_shopstick);
+        philo_eating(philos);
+        pthread_mutex_unlock(&philos->sceen->shopsticks[right_shopstick]);
+        pthread_mutex_unlock(&philos->sceen->shopsticks[left_shopstick]);
+        sleep_and_think(philos);
     }
     printf("Philosopher %d is thinking\n", philos->id);
     return (NULL);
 }
+
+void    sleep_and_think(t_philosopher *philo)
+{
+    ft_print_msg("is sleeping", philo);
+    usleep(philo->sceen->zzz_time * 1000);
+    ft_print_msg("is thinking", philo);
+}
+
 void	grab_fork(t_philosopher *philo, int shop)
 {
 	pthread_mutex_lock(&philo->sceen->shopsticks[shop]);
-	ft_print_msg("has taken a fork", philo->sceen);
+	ft_print_msg("has taken a fork", philo);
 }
 
 t_philosopher   *allocate_for_philo(t_philo *sceen)
@@ -49,7 +61,7 @@ t_philosopher   *allocate_for_philo(t_philo *sceen)
     if (philosophers == NULL)
         error("Failed to allocate memory for philosophers");
     i = 0;
-    while (i <= sceen->philos)
+    while (i < sceen->philos)
     {
         philosophers[i].id = i;
         philosophers[i].ate = 0;
@@ -61,25 +73,32 @@ t_philosopher   *allocate_for_philo(t_philo *sceen)
     return (philosophers);
 }
 
-void    spawn_philos(t_philo *sceen)
+void spawn_philos(t_philo *sceen)
 {
-    int i;
-    pthread_t observer;
-    
-    i = 0;
-    sceen->start_time = starting_time();
+    t_philosopher *philosophers;
+    int i = 0;
+
+    philosophers = allocate_for_philo(sceen);
+    if (philosophers == NULL)
+        return;
 
     while (i < sceen->philos)
     {
-        sceen->philosophers[i].id = i;
-        sceen->philosophers[i].sceen = sceen;
-        sceen->philosophers[i].should_die = 0;
-        sceen->philosophers[i].ate = 0;
-        sceen->philosophers[i].last_meal = sceen->start_time;
-        pthread_create(&sceen->philosophers->thread, NULL, philosopher_routine, &sceen->philosophers[i]);
-        pthread_create(&observer, NULL, reaper, &sceen->philosophers[i]);
-        pthread_detach(observer);
-    
+        if (pthread_create(&philosophers[i].thread, NULL, philosopher_routine, &philosophers[i]) != 0)
+        {
+            perror("Failed to create thread");
+            free(philosophers);
+            return;
+        }
+        i++;
     }
-    
+
+    i = 0;
+    while (i < sceen->philos)
+    {
+        pthread_join(philosophers[i].thread, NULL);
+        i++;
+    }
+
+    free(philosophers);
 }
