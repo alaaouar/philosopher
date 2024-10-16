@@ -6,7 +6,7 @@
 /*   By: alaaouar <alaaouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:30:35 by alaaouar          #+#    #+#             */
-/*   Updated: 2024/10/15 20:33:45 by alaaouar         ###   ########.fr       */
+/*   Updated: 2024/10/16 10:36:40 by alaaouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int main(int ac, char **av)
     t_philo sceen;    
 
     everything_init(&sceen, ac, av);
-    print_sceen(&sceen);
     if (starting_check(av, ac) != 0)
         error("ERROR at THE STARTING CHECK !!");
     mutex_lunch(&sceen);

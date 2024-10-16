@@ -6,7 +6,7 @@
 /*   By: alaaouar <alaaouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:30:44 by alaaouar          #+#    #+#             */
-/*   Updated: 2024/10/15 17:36:52 by alaaouar         ###   ########.fr       */
+/*   Updated: 2024/10/16 10:37:52 by alaaouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ typedef struct s_philosopher
     t_philo     *sceen;
 }               t_philosopher;
 
-        /*      theards.c     */
-
 void            *philosopher_routine(void *arg);
 void	        grab_fork(t_philosopher *philo, int f);
 void	        mutex_lunch(t_philo *sceen);
@@ -58,13 +56,10 @@ long long	    starting_time(void);
 void            *reaper(void *arg);
 void            *philos_hunger(void *arg);
 void            spawn_philos(t_philo *sceen);
-
-        /*      parcing       */
         
-void    error(const char *message);
+void     error(const char *message);
 int     starting_check(char **av, int ac);
 int     ft_atoi(char *str);
-void    print_sceen(t_philo *sceen);
 void	*ft_calloc(size_t count, size_t size);
 void	ft_print_msg(char *message,t_philosopher *sceen);
 void    philo_eating(t_philosopher *philo);

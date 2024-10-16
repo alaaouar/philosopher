@@ -6,7 +6,7 @@
 /*   By: alaaouar <alaaouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:33:30 by alaaouar          #+#    #+#             */
-/*   Updated: 2024/10/12 20:51:01 by alaaouar         ###   ########.fr       */
+/*   Updated: 2024/10/16 10:36:46 by alaaouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,6 @@ void error(const char *message)
         i++;
     }
     exit(1);
-}
-
-void print_sceen(t_philo *sceen)
-{
-    printf("Philosophers: %d\n", sceen->philos);
-    printf("Rip Time: %d\n", sceen->rip_time);
-    printf("Eat Time: %d\n", sceen->eat_time);
-    printf("Sleep Time: %d\n", sceen->zzz_time);
 }
 
 int starting_check(char **av, int ac)

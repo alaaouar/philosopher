@@ -6,7 +6,7 @@
 /*   By: alaaouar <alaaouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:54:37 by alaaouar          #+#    #+#             */
-/*   Updated: 2024/10/15 20:39:39 by alaaouar         ###   ########.fr       */
+/*   Updated: 2024/10/16 10:46:11 by alaaouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void    *philosopher_routine(void *arg)
         grab_fork(philos, right_shopstick);
         if (philos->sceen->philos == 1)
         {
-            sleep(philos->sceen->rip_time);
+            usleep(philos->sceen->rip_time);
             break;
         }
         grab_fork(philos, left_shopstick);
@@ -35,14 +35,13 @@ void    *philosopher_routine(void *arg)
         pthread_mutex_unlock(&philos->sceen->shopsticks[left_shopstick]);
         sleep_and_think(philos);
     }
-    printf("Philosopher %d is thinking\n", philos->id);
     return (NULL);
 }
 
 void    sleep_and_think(t_philosopher *philo)
 {
     ft_print_msg("is sleeping", philo);
-    usleep(philo->sceen->zzz_time * 1000);
+    usleep(philo->sceen->zzz_time);
     ft_print_msg("is thinking", philo);
 }
 
@@ -97,7 +96,6 @@ void spawn_philos(t_philo *sceen)
     philosophers = allocate_for_philo(sceen);
     if (philosophers == NULL)
         return;
-
     while (i < sceen->philos)
     {
         if (pthread_create(&philosophers[i].thread, NULL, philosopher_routine, &philosophers[i]) != 0)
@@ -115,7 +113,6 @@ void spawn_philos(t_philo *sceen)
         pthread_detach(observer);
         i++;
     }
-    
     i = 0;
     while (i < sceen->philos)
     {
