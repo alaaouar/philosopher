@@ -6,7 +6,7 @@
 /*   By: alaaouar <alaaouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 14:30:30 by alaaouar          #+#    #+#             */
-/*   Updated: 2024/10/11 14:40:30 by alaaouar         ###   ########.fr       */
+/*   Updated: 2024/10/16 11:19:04 by alaaouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,15 @@
 int	ft_atoi(char *str)
 {
 	long	i;
-	int		s;
 	long	o;
 
 	i = 0;
 	o = 0;
-	s = 1;
-	
-	while ((str[i] != '\0') && (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13)))
-		i++;
-	if (str[i] == '-' && (str[i + 1] >= '0' && str[i + 1] <= '9'))
+	if (str[i] == '-')
 	{
-		i++;
-		s = -1;
+		error("Invalid argument\n");
 	}
-	if (str[i] == '+' && (str[i + 1] >= '0' && str[i + 1] <= '9'))
+	if (str[i] == '+')
 		i++;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
@@ -37,6 +31,5 @@ int	ft_atoi(char *str)
 		o += str[i] - 48;
 		i++;
 	}
-	o *= s;
 	return (o);
 }

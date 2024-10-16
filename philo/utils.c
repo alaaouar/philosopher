@@ -6,7 +6,7 @@
 /*   By: alaaouar <alaaouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 17:43:34 by alaaouar          #+#    #+#             */
-/*   Updated: 2024/10/14 20:01:13 by alaaouar         ###   ########.fr       */
+/*   Updated: 2024/10/16 11:24:22 by alaaouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ int ft_strlen(char *str)
 void	ft_print_msg(char *message,t_philosopher *sceen)
 {
 	pthread_mutex_lock(&sceen->sceen->free_shopsticks);
-	printf("%d %s\n", sceen->id + 1, message);
+	printf("%lld   %d %s\n", current_time(sceen->sceen), sceen->id + 1, message);
 	pthread_mutex_unlock(&sceen->sceen->free_shopsticks);
 }

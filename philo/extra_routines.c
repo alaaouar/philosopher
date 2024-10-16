@@ -6,7 +6,7 @@
 /*   By: alaaouar <alaaouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 10:42:13 by alaaouar          #+#    #+#             */
-/*   Updated: 2024/10/15 17:30:26 by alaaouar         ###   ########.fr       */
+/*   Updated: 2024/10/16 12:37:57 by alaaouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void    *reaper(void *arg)
     {
         if ((stone->last_meal + stone->sceen->rip_time) < starting_time())
         {
-            ft_print_msg("DIED", stone);
+            ft_print_msg("      DIED", stone);
             stone->should_die = 1;
             stone->sceen->end = 1;
         }
@@ -41,4 +41,20 @@ void    *philos_hunger(void *arg)
             sceen->end = 1;
     }
     return (NULL);
+}
+
+void	ft_join_free(t_philo *sceen)
+{
+    int	i;
+
+    i = 0;
+    while (i < sceen->philos)
+        pthread_join(sceen->philosophers[i++].thread, NULL);
+    free(sceen->philosophers);
+    i = 0;
+    while (i < sceen->philos)
+        pthread_mutex_destroy(&sceen->shopsticks[i++]);
+    pthread_mutex_destroy(&sceen->free_shopsticks);
+    free(sceen->shopsticks);
+    free(sceen);
 }

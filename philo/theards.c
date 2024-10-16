@@ -6,7 +6,7 @@
 /*   By: alaaouar <alaaouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:54:37 by alaaouar          #+#    #+#             */
-/*   Updated: 2024/10/16 10:46:11 by alaaouar         ###   ########.fr       */
+/*   Updated: 2024/10/16 12:41:19 by alaaouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void    *philosopher_routine(void *arg)
         grab_fork(philos, right_shopstick);
         if (philos->sceen->philos == 1)
         {
-            usleep(philos->sceen->rip_time);
+            usleep(philos->sceen->rip_time * 1000);
             break;
         }
         grab_fork(philos, left_shopstick);
@@ -40,15 +40,15 @@ void    *philosopher_routine(void *arg)
 
 void    sleep_and_think(t_philosopher *philo)
 {
-    ft_print_msg("is sleeping", philo);
-    usleep(philo->sceen->zzz_time);
-    ft_print_msg("is thinking", philo);
+    ft_print_msg("      is sleeping", philo);
+    usleep(philo->sceen->zzz_time * 1000);
+    ft_print_msg("      is thinking", philo);
 }
 
 void	grab_fork(t_philosopher *philo, int shop)
 {
 	pthread_mutex_lock(&philo->sceen->shopsticks[shop]);
-	ft_print_msg("has taken a fork", philo);
+	ft_print_msg("  has taken a fork", philo);
 }
 
 t_philosopher   *allocate_for_philo(t_philo *sceen)

@@ -6,7 +6,7 @@
 /*   By: alaaouar <alaaouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:30:35 by alaaouar          #+#    #+#             */
-/*   Updated: 2024/10/16 10:36:40 by alaaouar         ###   ########.fr       */
+/*   Updated: 2024/10/16 12:10:08 by alaaouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,13 @@ void    everything_init(t_philo *sceen, int ac, char **av)
 
 int main(int ac, char **av)
 {
-    t_philo sceen;    
+    t_philo *sceen;    
 
-    everything_init(&sceen, ac, av);
+    sceen = ft_calloc(1, sizeof(t_philo));
+    everything_init(sceen, ac, av);
     if (starting_check(av, ac) != 0)
         error("ERROR at THE STARTING CHECK !!");
-    mutex_lunch(&sceen);
-    spawn_philos(&sceen);
+    mutex_lunch(sceen);
+    spawn_philos(sceen);
     return 0;
 }
